@@ -1,4 +1,4 @@
-# canvas4k
+# X Clicker
 
 Project for Computer Science 10<br>
-Not yet complete<br>
+Testing cookies<br>

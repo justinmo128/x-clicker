@@ -1,5 +1,5 @@
-let x = getCookie("x");
-let cursors = getCookie("cursors");
+let x = +getCookie("x");
+let cursors = +getCookie("cursors");
 let cursorOut = document.getElementById("cursor-amt");
 let output = document.getElementById("xcount");
 output.innerHTML = x;
@@ -23,17 +23,24 @@ function buyCursor() {
         x -= 15;
         cursors++;
         cursorOut.innerHTML = `${cursors} (${(cursors / 5).toFixed(1)}X/second)`;
-        setInterval(() => {x++; output.innerHTML = x;}, 5000);
         output.innerHTML = x;
     }
 }
 
+window.addEventListener("load", useCursors);
+function useCursors() {
+    if (cursors > 0) {
+        click();
+    }
+    setTimeout(useCursors, 5000/cursors);
+}
+
 function getCookie(cname) {
     let name = cname + "=";
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for(let i = 0; i <ca.length; i++) {
-        let c = ca[i];
+    let allCookies = decodeURIComponent(document.cookie);
+    let cookieArray = allCookies.split(';');
+    for(let i = 0; i < cookieArray.length; i++) {
+        let c = cookieArray[i];
         while (c.charAt(0) == ' ') {
             c = c.substring(1);
         }
